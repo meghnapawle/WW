@@ -5,13 +5,20 @@ import animalProfileRoutes from "./routes/animalProfileRoutes.js"
 import quizRoutes from "./routes/quizRoutes.js"
 import seaExplorationRoutes from "./routes/seaExplorationRoutes.js"
 import rateLimiter from './middleware/rateLimiter.js';
+import cors from "cors";
 
 dotenv.config();
 const app = express();
 // connectDB();
+app.use(cors(
+  {
+    origin: "http://localost:5173"
+  }
+));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(rateLimiter);
+
 
 app.use("/quiz",quizRoutes);
 app.use("/explore",seaExplorationRoutes);
