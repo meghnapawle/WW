@@ -10,14 +10,14 @@ dotenv.config();
 const app = express();
 // connectDB();
 app.use(express.json());
-app.use(express.urlencoded())
+app.use(express.urlencoded({extended:true}));
 app.use(rateLimiter);
 
 app.use("/quiz",quizRoutes);
 app.use("/explore",seaExplorationRoutes);
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+app.listen(5173, () => {
+  console.log('Server is running on port 5173');
 });
 app.get("/",(req,res)=>{
  res.status(200).send("hello raunak world");
