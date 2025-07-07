@@ -9,7 +9,7 @@ import cors from "cors";
 
 dotenv.config();
 const app = express();
-// connectDB();
+connectDB();
 app.use(cors(
   {
     origin: "http://localost:5173"
@@ -28,5 +28,4 @@ app.listen(5173, () => {
 });
 app.get("/",(req,res)=>{
  res.status(200).send("hello raunak world");
-})
-app.use
+});

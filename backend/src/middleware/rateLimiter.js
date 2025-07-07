@@ -9,6 +9,7 @@ try {
             message : " too many requests"
         });
      }
+     console.log("connected to redis");
      next();
 } catch (error) {
     console.error("rate limit error",error);
