@@ -6,7 +6,7 @@
         useNewUrlParser: true,
         useUnifiedTopology: true
     });
-      console.log(" Dammmm, databse connect ho gaya ");
+      console.log(" databse connected");
    }
    catch(error)
    {
