@@ -1,3 +1,7 @@
+// uses ".banner" for scroll trigger
+// navbar expands when bottom of banner reaches 70% of viewport
+// refer lines 118 and 119 to change trigger behaviour
+
 import './nav.css';
 import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
@@ -125,7 +129,7 @@ function Nav(){
                 gsap.to(element, hide_nav);
             
             },
-            markers: true,
+            // markers: true,
         })
         
 
