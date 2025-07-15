@@ -1,19 +1,18 @@
-import "./index.css";
-
-import Question from "./components/QuizQuestion.jsx";
+import { Routes , Route } from "react-router";
+import OceanMap from "./pages/OceanMap.jsx";
+import Login from "./pages/Login.jsx";
+import SignUp from "./pages/SignUp.jsx";
 
 function App() {
   return (
-    <>
-      <Question
-        QuestionName="How do you spend your weekend?"
-        Options1="Exploring with friends"
-        Options2="Reading or drawing alone"
-        Options3="t the gym or hiking "
-        Options4="A slow day at the beach"
-      />
-      <h1>hello world raunak</h1>
-    </>
+   <div>
+    <Routes>
+      <Route path= "/map" element ={<OceanMap/>} /> 
+      <Route path= "/login" element ={<Login />} /> 
+
+      <Route path= "/Signup" element ={<SignUp />} /> 
+    </Routes>
+   </div>
   );
 }
 
