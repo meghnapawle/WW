@@ -1,0 +1,39 @@
+
+nav{
+    color: white;
+    box-sizing: border-box;
+    font-size: 1.2em;
+    background-color: black;
+    width: 98vw;
+    display: flex;
+    position: fixed;
+    justify-content: space-between;
+    padding: 1em;
+    align-items: center;
+    height: 3.5em;
+    transform: translate(0,10%);
+    border-radius: 3em;
+    z-index: 99;
+    
+}
+.list{
+    height: 100%;
+    display: flex;
+    list-style: none;
+    justify-content:space-around;
+}
+li{
+    height: 100%;
+    border-radius: 2.5em;
+    text-align: center;
+    padding: calc((3em - 1.2em)/2);
+}
+li:hover{
+    background-color: rgba(255, 255, 255, 0.3);
+    transition: background 0.1s;
+
+}
+.logo{
+    text-align: 'center';
+    transform: translate(0,0);
+}
