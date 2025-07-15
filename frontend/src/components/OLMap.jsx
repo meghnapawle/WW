@@ -23,7 +23,7 @@ const OLMap = () => {
     });
   }, []);
 
-  return <div ref={olRef} style={{ height: '50vh', width: '100%' }} />;
+  return <div ref={olRef} className='w-full h-screen' />;
 };
 
 export default OLMap;
