@@ -13,7 +13,7 @@ function App() {
       <Route path= "/map" element ={<OceanMap/>} /> 
       <Route path= "/login" element ={<Login />} /> 
 
-      <Route path= "/Signup" element ={<SignUp />} /> 
+      <Route path= "/signup" element ={<SignUp />} /> 
     </Routes>
    </div>
   );
