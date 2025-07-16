@@ -1,6 +1,6 @@
 // uses ".banner" for scroll trigger
 // navbar expands when bottom of banner reaches 70% of viewport
-// refer lines 118 and 119 to change trigger behaviour
+// refer lines 121 and 122 to change trigger behaviour
 
 import './nav.css';
 import { useRef, useEffect } from 'react';
@@ -18,7 +18,8 @@ const show_nav= {
             display :'flex',
             width: '97vw',
             duration: 0.5, 
-            ease: "power2.out"
+            ease: "power2.out",
+            justifyContent: "space-between",
         }
 
 const show_links={
@@ -32,7 +33,6 @@ const show_links={
 
 const hide_nav= {
         stagger:0,
-        // display: 'block',
         textAlign:"center",
         width:'7vw',
         left: "50%",
@@ -56,52 +56,55 @@ function Nav(){
 
 
     const handleMouseEnter = ()=>{
-    console.log("evevt triggered")
-    const navBar=navbar.current
-    const links=li.current
-    if (!navBar || !links) {
-        console.warn("Refs not ready on mouse enter.");
-        return;
-    }
+        console.log("evevt triggered")
+        const navBar=navbar.current
+        const links=li.current
+        if (!navBar || !links) {
+            console.warn("Refs not ready on mouse enter.");
+            return;
+        }
 
-    console.log("Mouse Enter - Animation Started");
-    if(navBar.classList.contains("active")) return;
-    if (tl.current) {
-        tl.current.kill();
-    }
-    tl.current=gsap.timeline({ defaults: { ease: "power2.out" } });
-    tl.current
-    .to(navBar,show_nav)
-    .to(links, show_links)
+        console.log("Mouse Enter - Animation Started");
+        if(navBar.classList.contains("active")) return;
+        if (tl.current) {
+            tl.current.kill();
+        }
+        tl.current=gsap.timeline({ defaults: { ease: "power2.out" } });
+        tl.current
+        .to(navBar,show_nav)
+        .to(links, show_links)
     }
 
     const handleMouseOut = ()=>{
-    console.log("mouseout triggered")
-    const navBar=navbar.current
-    const links=li.current
-    if (!navBar || !links) {
-        console.warn("Refs not ready on mouse out.");
-        return;
-    }
-    if(navBar.classList.contains("active")) return;
-    if (tl.current) {
-            tl.current.kill();
+        console.log("mouseout triggered")
+        const navBar=navbar.current
+        const links=li.current
+        if (!navBar || !links) {
+            console.warn("Refs not ready on mouse out.");
+            return;
         }
-    console.log("Mouse out - Animation Started");
-    tl.current=gsap.timeline({ defaults: { ease: "power2.out" } });
-    tl.current
-        .to(links, hide_links)
-        .to(navBar, hide_nav);
+        if(navBar.classList.contains("active")) return;
+        if (tl.current) {
+                tl.current.kill();
+            }
+        console.log("Mouse out - Animation Started");
+        tl.current=gsap.timeline({ defaults: { ease: "power2.out" } });
+        tl.current
+            .to(links, hide_links)
+            .to(navBar, hide_nav)
+            .to(navBar, {justifyContent: "center", stagger:0, duration:0});
 
-}
+    }
     useGSAP(()=>{
         const element= navbar.current
         const liRef=li.current
         gsap.set(element, {
             textAlign:"center",
             width:'7vw',
+            minWidth: '6em',
             left: "50%",
             xPercent: -50,
+            justifyContent:"center"
         })
         gsap.set(liRef, {
             visibility: "hidden",
@@ -119,17 +122,18 @@ function Nav(){
             start : "bottom 70%",
             toggleClass: {targets: ".nav", className: "active"},
             onEnter: () => {
-                console.log("Scroll Enter: Expand Nav");
-                gsap.to(element, show_nav);
-                gsap.to(liRef, show_links);
+                const tl = gsap.timeline();
+                tl.to(element, show_nav)
+                .to(liRef, show_links);
             },
             onLeaveBack: () => {
-                console.log("Scroll Leave Back:Contract Nav");
-                gsap.to(liRef, hide_links);
-                gsap.to(element, hide_nav);
+                const tl = gsap.timeline();
+
+                    tl.to(liRef, hide_links)
+                    .to(element, hide_nav)
+                    .to(element, { justifyContent: "center", stagger: 0, duration: 0 });
             
             },
-            // markers: true,
         })
         
 
