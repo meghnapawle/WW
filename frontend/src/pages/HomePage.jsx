@@ -1,15 +1,22 @@
-import Nav from "../components/navbar/Nav.jsx";
+import App from './home/App.jsx'
+import Nav from '../components/navbar/Nav.jsx'
+import Items from './home/Items.jsx'
+import Facts from './home/facts.jsx'
 
-
-
-import React from 'react'
-
-const HomePage = () => {
-  return (
-    
-      <Nav/>
-
+function HomePage(){
+  return(
+    <>
+        <Nav/>
+        <App />
+        <div className='content'>
+        <Facts></Facts>
+        <Items></Items>
+        </div>
+        <footer className='footer'>
+            <h1>Just A footer</h1>
+            <p>created by team rocket</p>
+        </footer>
+    </>
   )
 }
-
 export default HomePage
