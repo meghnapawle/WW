@@ -12,7 +12,7 @@ gsap.registerPlugin(CSSPlugin);
 const items = [
   {
     name: "Explore",
-    imageUrl: "../../Assets/explore_image.webp",
+    imageUrl: "D:\web wonder\WW\frontend\src\Assets\explore_image.webp",
     text: "Dive into the depths — discover the secrets of the sea.",
   },
   {
@@ -35,20 +35,21 @@ const items = [
     name: "Infographics",
     imageUrl: "../../Assets/infographics_image.jpg",
     text: "The ocean, visualized — facts that make waves.",
+    link :"/map"
   },
   {
     name: "Quiz",
-    imageUrl: "../../Assets/quiz_image.png",
+    imageUrl: "../../../Assets/quiz_image.png",
     text: "Test your tides — how well do you know the ocean?",
   }
 ];
 
 const BannerItems = forwardRef(({ item }, ref) => (
-  <div className="banner-item" ref={ref}>
+  <div className="banner-item  flex-1/2" ref={ref}>
     <img className="item-image" src={item.imageUrl} alt={item.name} />
-    <div className="text">
+     <div className="text">
       <h1>{item.name}</h1>
-      <p className="text">{item.text}</p>
+      <p className="text">{item.text}</p> 
     </div>
   </div>
 ));

@@ -1,3 +1,4 @@
+@import "tailwindcss";
 .facts-carousel {
   display: flex;
   width: 98%;

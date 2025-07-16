@@ -1,9 +1,5 @@
+@import "tailwindcss";
 
-*{
-    margin: 0px;
-    padding: 0px ;
-    box-sizing: border-box;
-}
 .Item-cards {
   width: 98%;
   display: flex;
@@ -62,4 +58,9 @@
 
 .arrow.right {
   right: 1rem;
+}
+
+.item-image{
+   width: fit-content;
+   height: 100%;
 }
