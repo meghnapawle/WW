@@ -1,4 +1,4 @@
-import './App.css';
+import './Background.css';
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -6,7 +6,7 @@ import { SplitText } from 'gsap/SplitText';
 
 gsap.registerPlugin(SplitText)
 
-function App() {
+function Background() {
   const headingRef = useRef(null)
   useEffect(()=>{
     const circle = document.querySelector(".cursorEffect")
@@ -40,4 +40,4 @@ function App() {
   )
 }
 
-export default App
+export default Background
