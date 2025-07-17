@@ -1,162 +1,210 @@
 // uses ".banner" for scroll trigger
 // navbar expands when bottom of banner reaches 70% of viewport
-// refer lines 121 and 122 to change trigger behaviour
+// refer lines 154 and 155 to change trigger behaviour
 
 import './nav.css';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
 import { CSSPlugin } from 'gsap/CSSPlugin';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useMediaQuery } from 'react-responsive';
 
-gsap.registerPlugin(ScrollTrigger);
-gsap.registerPlugin(CSSPlugin);
+gsap.registerPlugin(ScrollTrigger, CSSPlugin);
+
+const show_nav = {
+  x: 0,
+  display: 'flex',
+  flexDirection:'row',
+  width: '97vw',
+  duration: 0.5,
+  ease: "power2.out",
+  justifyContent: 'space-between',
+};
+
+const show_links = {
+  visibility: 'visible',
+  display: 'flex',
+  flexDirection:'row',
+  opacity: 1,
+  duration: 0.2,
+  ease: "power2.out"
+
+};
+
+const show_links_mobile = {
+  visibility: 'visible',
+  display: 'flex',
+  opacity: 1,
+  duration: 0.2,
+  ease: "power2.out"
+
+};
+
+const hide_nav = {
+  textAlign: 'center',
+  width: '7vw',
+  left: '50%',
+  xPercent: -50,
+  duration: 0.3,
+};
+
+const hide_links = {
+  delay:0.1,
+  visibility: 'hidden',
+  opacity: 0,
+  display: 'none',
+  duration: 0.2
+};
 
 
-const show_nav= {
-            x:0 ,
-            display :'flex',
-            width: '97vw',
-            duration: 0.5, 
-            ease: "power2.out",
-            justifyContent: "space-between",
-        }
+const nav_items = ["Explore", "Threats", "Solutions", "Stories", "Infographics", "Quiz"];
 
-const show_links={
-        visibility: "visible",
-        display:'flex',
-        opacity: 1,
-        duration: 0, 
-        ease: "power2.out"
+function Nav() {
+  const navbar = useRef(null);
+  const liRef = useRef(null);
+  const tl = useRef(null);
+  const isMobile = useMediaQuery({ query: '(max-width: 800px)' });
+  const [expanded, setExpanded] = useState(false);
+  const scrollTriggerRef = useRef(null);
+  const clickRef = useRef(null)
+
+  const expand = () => {
+    if (tl.current) tl.current.kill();
+    gsap.to(clickRef.current, {width:"auto"})
+    tl.current = gsap.timeline();
+    tl.current.to(navbar.current, show_nav).to(liRef.current, show_links);
+  };
+
+  const collapse = () => {
+    if (tl.current) tl.current.kill();
+    tl.current = gsap.timeline();
+    tl.current
+            .to(liRef.current, hide_links)
+            .to(navbar.current, hide_nav)
+            .to(navbar.current, {justifyContent: "center"})
+  };
+
+  const mobileExpand= ()=>{
+    if (tl.current) tl.current.kill();
+    gsap.set(navbar.current, { flexDirection: "column", alignItems: "center" });
+    gsap.set(liRef.current, { flexDirection: "column" });
+
+    tl.current = gsap.timeline();
+    tl.current.to(navbar.current, 
+      {
+        x: 0,
+        height: "23.5em",
+        display: 'flex',
+        width: '97vw',
+        duration: 0.5,
+        ease: "power2.out",
+        justifyContent: 'space-between',
+
+      }
+
+    )
+    .to(liRef.current, show_links_mobile);
+  }
+
+  const mobileCollapse = () => {
+  if (tl.current) tl.current.kill();
+  tl.current = gsap.timeline();
+  tl.current
+    .to(liRef.current, hide_links)
+    .to(navbar.current, {
+      height: "auto",
+      duration: 0.4,
+      ease: "power2.inOut",
+      width:"7vw",
     }
+    )}
 
+  useEffect(()=>{
+    const nav = navbar.current;
+    const list = liRef.current;
 
-const hide_nav= {
-        stagger:0,
-        textAlign:"center",
-        width:'7vw',
+    if (!nav || !list) return;
+      gsap.set(nav, {
+        height: 'auto',
+        textAlign: "center",
+        width: "7vw",
+        minWidth: "6em",
         left: "50%",
         xPercent: -50,
-        duration: 0.3,
-    }
+        display: "flex",
+        justifyContent:"center",
+      });
 
-const hide_links= {
-        delay:0.1,
+      gsap.set(list, {
         visibility: "hidden",
         opacity: 0,
-        display: 'none',
-        duration: 0.1    
+        display: "none"
+      });
+  },[])
+  useEffect(() => {
+    const nav = navbar.current;
+    const list = liRef.current;
+
+    if (!nav || !list) return;
+    if (!isMobile) {
+      nav.addEventListener("mouseenter", expand);
+      nav.addEventListener("mouseleave", collapse);
+
+      scrollTriggerRef.current = ScrollTrigger.create({
+        trigger: ".banner",
+        start: "bottom 70%",
+        onEnter: () => {
+          expand();
+          setExpanded(true);
+        },
+        onLeaveBack: () => {
+          collapse();
+          setExpanded(false);
+        }
+      });
+
+      return () => {
+        nav.removeEventListener("mouseenter", expand);
+        nav.removeEventListener("mouseleave", collapse);
+        scrollTriggerRef.current?.kill();
+      };
     }
 
-const nav_items=["Explore", "Threats", "Solutions", "Stories", "Infographics", "Quiz"]
-function Nav(){
-    const navbar = useRef(null)
-    const li = useRef(null)
-    const tl = useRef(null);
+    const toggle = () => {
+      if (expanded) {
+        mobileCollapse();
+        setExpanded(false);
+      } else {
+        gsap.to(clickRef.current, {width:"100%"})
+        mobileExpand();
+        setExpanded(true);
+      }
+    };
 
+    clickRef.current.addEventListener("click", toggle);
 
-    const handleMouseEnter = ()=>{
-        console.log("evevt triggered")
-        const navBar=navbar.current
-        const links=li.current
-        if (!navBar || !links) {
-            console.warn("Refs not ready on mouse enter.");
-            return;
-        }
+    return () => {
+      if(clickRef.current){
+      clickRef.current.removeEventListener("click", toggle);
+      }
+    };
+  }, [isMobile, expanded]);
 
-        console.log("Mouse Enter - Animation Started");
-        if(navBar.classList.contains("active")) return;
-        if (tl.current) {
-            tl.current.kill();
-        }
-        tl.current=gsap.timeline({ defaults: { ease: "power2.out" } });
-        tl.current
-        .to(navBar,show_nav)
-        .to(links, show_links)
-    }
-
-    const handleMouseOut = ()=>{
-        console.log("mouseout triggered")
-        const navBar=navbar.current
-        const links=li.current
-        if (!navBar || !links) {
-            console.warn("Refs not ready on mouse out.");
-            return;
-        }
-        if(navBar.classList.contains("active")) return;
-        if (tl.current) {
-                tl.current.kill();
-            }
-        console.log("Mouse out - Animation Started");
-        tl.current=gsap.timeline({ defaults: { ease: "power2.out" } });
-        tl.current
-            .to(links, hide_links)
-            .to(navBar, hide_nav)
-            .to(navBar, {justifyContent: "center", stagger:0, duration:0});
-
-    }
-    useGSAP(()=>{
-        const element= navbar.current
-        const liRef=li.current
-        gsap.set(element, {
-            textAlign:"center",
-            width:'7vw',
-            minWidth: '6em',
-            left: "50%",
-            xPercent: -50,
-            justifyContent:"center"
-        })
-        gsap.set(liRef, {
-            visibility: "hidden",
-            opacity: 0,
-            display: 'none'
-        })
-        if(navbar.current ){
-            element.addEventListener('pointerenter', handleMouseEnter);
-            element.addEventListener('pointerleave', handleMouseOut);
-        }
-
-        
-        ScrollTrigger.create({
-            trigger: ".banner",
-            start : "bottom 70%",
-            toggleClass: {targets: ".nav", className: "active"},
-            onEnter: () => {
-                const tl = gsap.timeline();
-                tl.to(element, show_nav)
-                .to(liRef, show_links);
-            },
-            onLeaveBack: () => {
-                const tl = gsap.timeline();
-
-                    tl.to(liRef, hide_links)
-                    .to(element, hide_nav)
-                    .to(element, { justifyContent: "center", stagger: 0, duration: 0 });
-            
-            },
-        })
-        
-
-        return ()=> {
-            if(navbar.current){
-            element.removeEventListener('pointerenter', handleMouseEnter);
-            element.removeEventListener('pointerleave', handleMouseOut);
-            }
-        }
-},[])
-    return(
-        <nav ref={navbar} className='nav' >
-            <div className='logo'>
-                <p>Ocean</p>
-            </div>
-            <div>
-                <ul ref={li} className='list'>
-                    {nav_items.map((item, index)=>(
-                        <li key={index}>{item}</li>
-                    ))}
-                </ul>
-            </div>
-        </nav>
-    )
+ 
+  return (
+    <nav ref={navbar} className="nav">
+      <div ref={clickRef} className="logo">
+        <p>Ocean</p>
+      </div>
+      <div>
+        <ul ref={liRef} className="list">
+          {nav_items.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+      </div>
+    </nav>
+  );
 }
-export default Nav
+
+export default Nav;
