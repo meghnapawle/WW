@@ -140,7 +140,7 @@ function Nav() {
         opacity: 0,
         display: "none"
       });
-  },[])
+  },[isMobile])
   useEffect(() => {
     const nav = navbar.current;
     const list = liRef.current;
