@@ -66,30 +66,12 @@ function Items(){
         return () => clearInterval(interval);
   }, []);
 
-  const changeItem = (nextIndex) => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-
-    const el = bannerRef.current;
-
-    gsap.to(el, {
-        opacity: 0,
-        y: 30,
-        duration: 0.3,
-        ease: "power2.out",
-        onComplete: () => {
-          setCurrentIndex(nextIndex); // change content after fade out
-        }
-      });
-  };
   const nextItem = () => {
     setCurrentIndex((prev) => (prev + 1) % items.length);
-    changeItem(next);
   };
 
   const prevItem = () => {
     setCurrentIndex((prev) => (prev - 1 + items.length) % items.length);
-    changeItem(prev);
   };
 
   useEffect(() => {
