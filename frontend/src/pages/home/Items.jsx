@@ -4,7 +4,12 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { CSSPlugin } from 'gsap/CSSPlugin';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
+import explore_image from "../../Assets/explore_image.webp"
+import threats_image from "../../Assets/threats_image.webp";
+import quiz_image from "../../Assets/quiz_image.png";
+import solutions_image from "../../Assets/solutions_image.webp";
+import stories_image from "../../Assets/stories_image.jpeg";
+import infographics_image from "../../Assets/infographics_image.jpg";
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CSSPlugin);
 
@@ -12,41 +17,41 @@ gsap.registerPlugin(CSSPlugin);
 const items = [
   {
     name: "Explore",
-    imageUrl: "D:\web wonder\WW\frontend\src\Assets\explore_image.webp",
+    imageUrl: explore_image,
     text: "Dive into the depths — discover the secrets of the sea.",
   },
   {
     name: "Threats",
-    imageUrl: "../../Assets/threats_image.webp",
+    imageUrl: threats_image,
     text: "Facing the tide — the dangers our oceans endure.",
   },
   {
     name: "Solutions",
-    imageUrl: "../../Assets/solutions_image.webp",
+    imageUrl: solutions_image,
     text: "Turning the tide — how we can protect our oceans.",
     line2: "Hope floats — real answers for a healthier sea."
   },
   {
     name: "Stories",
-    imageUrl: "../../Assets/stories_image.jpeg",
+    imageUrl: stories_image,
     text: "Voices of the ocean — tales from the deep.",
   },
   {
     name: "Infographics",
-    imageUrl: "../../Assets/infographics_image.jpg",
+    imageUrl: infographics_image,
     text: "The ocean, visualized — facts that make waves.",
     link :"/map"
   },
   {
     name: "Quiz",
-    imageUrl: "../../../Assets/quiz_image.png",
+    imageUrl: quiz_image,
     text: "Test your tides — how well do you know the ocean?",
   }
 ];
 
 const BannerItems = forwardRef(({ item }, ref) => (
-  <div className="banner-item  flex-1/2" ref={ref}>
-    <img className="item-image" src={item.imageUrl} alt={item.name} />
+  <div className="banner-item " ref={ref}>
+    <img className="" src={item.imageUrl} alt={item.name} />
      <div className="text">
       <h1>{item.name}</h1>
       <p className="text">{item.text}</p> 

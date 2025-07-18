@@ -9,8 +9,8 @@ function HomePage(){
         <Nav/>
         <App />
         <div className='content'>
-        <Facts></Facts>
-        <Items></Items>
+        <Facts />
+        <Items />
         </div>
         <footer className='footer'>
             <h1>Just A footer</h1>

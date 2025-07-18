@@ -1,14 +1,14 @@
 import express from 'express';
 import { connectDB } from './config/db.js';
 import dotenv from "dotenv"
-import animalProfileRoutes from "./routes/animalProfileRoutes.js"
+
 import quizRoutes from "./routes/quizRoutes.js"
 import seaExplorationRoutes from "./routes/seaExplorationRoutes.js"
 import rateLimiter from './middleware/rateLimiter.js';
 import cors from "cors";
 import authUser from "./routes/authUser.js"
-import sendotp from "./utilis/sendotp.js"
-// import { sendEmail } from './gmailapi.js';
+
+
 dotenv.config(); 
 const app = express();
 connectDB();
