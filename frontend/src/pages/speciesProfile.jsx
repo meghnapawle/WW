@@ -1,5 +1,5 @@
 import Nav from "./Nav";
-import "./species.css"
+import "../index.css"
 import { useRef, useEffect, useState, forwardRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
