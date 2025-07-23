@@ -1,6 +1,6 @@
 // uses ".banner" for scroll trigger
 // navbar expands when bottom of banner reaches 70% of viewport
-// refer lines 154 and 155 to change trigger behaviour
+// refer lines 124 and 135 to change trigger behaviour
 
 import './nav.css';
 import { useRef, useEffect, useState } from 'react';
@@ -119,6 +119,26 @@ function Nav() {
     }
     )}
 
+  useEffect( ()=>{
+      scrollTriggerRef.current = ScrollTrigger.create({
+        trigger: ".banner",
+        start: "bottom 70%",
+        onEnter: () => {
+          if(!isMobile){
+            expand();
+            setExpanded(true);
+          }
+        },
+        onLeaveBack: () => {
+          if(!isMobile){
+            collapse();
+            setExpanded(false);
+          }
+        },
+      });
+      return ()=>{scrollTriggerRef.current?.kill();}
+  },[])
+
   useEffect(()=>{
     const nav = navbar.current;
     const list = liRef.current;
@@ -144,29 +164,19 @@ function Nav() {
   useEffect(() => {
     const nav = navbar.current;
     const list = liRef.current;
-
     if (!nav || !list) return;
     if (!isMobile) {
-      nav.addEventListener("mouseenter", expand);
-      nav.addEventListener("mouseleave", collapse);
+      if(!expanded){
+        nav.addEventListener("mouseenter", expand);
+        nav.addEventListener("mouseleave", collapse);
 
-      scrollTriggerRef.current = ScrollTrigger.create({
-        trigger: ".banner",
-        start: "bottom 70%",
-        onEnter: () => {
-          expand();
-          setExpanded(true);
-        },
-        onLeaveBack: () => {
-          collapse();
-          setExpanded(false);
-        }
-      });
+      }
 
       return () => {
+        if(!expanded){
         nav.removeEventListener("mouseenter", expand);
         nav.removeEventListener("mouseleave", collapse);
-        scrollTriggerRef.current?.kill();
+        }
       };
     }
 
