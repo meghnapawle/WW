@@ -1,6 +1,6 @@
 // uses ".banner" for scroll trigger
 // navbar expands when bottom of banner reaches 70% of viewport
-// refer lines 124 and 135 to change trigger behaviour
+// refer lines 124 and 125 to change trigger behaviour
 
 import './nav.css';
 import { useRef, useEffect, useState } from 'react';
@@ -118,26 +118,22 @@ function Nav() {
       width:"7vw",
     }
     )}
-
   useEffect( ()=>{
+    if(!isMobile){
       scrollTriggerRef.current = ScrollTrigger.create({
         trigger: ".banner",
         start: "bottom 70%",
         onEnter: () => {
-          if(!isMobile){
-            expand();
-            setExpanded(true);
-          }
+          expand();
+          setExpanded(true);
         },
         onLeaveBack: () => {
-          if(!isMobile){
-            collapse();
-            setExpanded(false);
-          }
-        },
-      });
-      return ()=>{scrollTriggerRef.current?.kill();}
-  },[])
+          collapse();
+          setExpanded(false);
+        },      });
+    }
+    return ()=>{scrollTriggerRef.current?.kill();}
+  },[isMobile])
 
   useEffect(()=>{
     const nav = navbar.current;
