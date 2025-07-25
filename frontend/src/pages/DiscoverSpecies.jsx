@@ -196,78 +196,100 @@ const DiscoverSpecies = ()=> {
 
   return (
     <>
-    <Nav/>
-    <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-[-5] bg-black opacity-0" ref={bgRef}/>
-    <div className="banner fixed top-0 left-0 h-screen w-screen -z-10 bg-cover bg-center overflow-hidden m-0 p-0" style={{ backgroundImage: `url(${background})`}}></div>
-      <img src={manta1img} alt="manta1" className='absolute top-[43%] left-[7%] w-[30%] z-10' 
-      ref={manta1}
-      onMouseMove={(e)=>handleMouseMove(e, manta1)}
-      onMouseLeave={()=>handleMouseLeave(manta1.current)}      
+      <Nav />
+      <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-[-5] bg-black opacity-0" ref={bgRef} />
+      <div 
+        className="banner fixed top-0 h-screen w-screen -z-10 bg-cover bg-center overflow-hidden m-0 p-0" 
+        style={{ backgroundImage: {background} }}
+      ></div>
+
+      <img 
+        src={manta1img} 
+        alt="manta1" 
+        className="absolute top-[43%] left-[7%] w-[25%] z-10 min-w-60" 
+        ref={manta1}
+        onMouseMove={(e) => handleMouseMove(e, manta1)}
+        onMouseLeave={() => handleMouseLeave(manta1.current)}      
       />
-      <img src={manta2img} alt="manta2" className='absolute top-[17%] left-[55%] z-10 w-[25%]'
-      ref={manta2}
-      onMouseMove={(e)=>handleMouseMove(e, manta2)}
-      onMouseLeave={()=>handleMouseLeave(manta2.current)}
-     />
-    <div ref={headingRef} className='main-heading h-screen w-full text-[7rem] font-extrabold text-white text-center relative my-8 flex items-center justify-center tracking-wide m-0 p-0'   style={{textShadow: "0 4px 8px rgba(0, 188, 212, 0.4), 0 0 20px rgba(0, 188, 212, 0.3)"}}><h1>Discover Species</h1></div>
-    <div className='cursorEffect pointer-events-none fixed h-[5vw] w-[5vw] rounded-[50%] transform translate-x-[-50%] translate-y-[-50%] z-999 backdrop-invert transition-all duration-[10ms] ease-linear'/>
-    <div className="min-h-screen">
-      <div ref={bgTrigger}>
-      <section className="p-10">
-        <h3 className="text-3xl font-bold mb-6 text-white">Explore Species</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-          {data.species.map((species) => {
-            const color = ColorMap[species.status.toLowerCase()] || "gray-300";
-            const glow = ShadowMap[species.status.toLowerCase()] || "";
-            return (
-              <div
-                key={species.name}
-                className={`p-4 rounded-xl bg-[#F1E4C3] transition-transform ease-linear transform hover:scale-105 hover:shadow-2xl ${glow}`}
-              >
-                <img
-                  src={species.image}
-                  alt={species.name}
-                  className="rounded-lg mb-3 w-full object-cover h-48"
-                />
-                <h4 className="text-lg font-semibold">{species.name}</h4>
-                <p className="text-sm italic leading-relaxed">
-                  {species.description}
-                </p>
-                <span className={`inline-block mt-2 px-3 py-1 text-xs rounded-full border-[3px] ${color}`}>
-                  {species.status}
-                </span>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-      <section className="p-10">
-        <h3 className="text-3xl font-bold mb-6 text-white">Endangered Species Spotlight</h3>
-        <div className="grid md:grid-cols-2 gap-6">
-          {data.endangered.map((species) => (
-            <div key={species.name} className="p-6 rounded-lg bg-[#F1E4C3] transition-transform ease-linear transform hover:scale-105 hover:shadow-2xl shadow-red-600">
-              <img
-                src={species.image}
-                alt={species.name}
-                className="rounded mb-4 w-full object-cover h-64"
-              />
-              <h4 className="text-2xl font-semibold">{species.name}</h4>
-              <p className="text-sm mt-2">{species.description}</p>
-              <button
-                className={`mt-4 px-4 py-2 rounded-md border border-red-600 hover:bg-red-600 hover:text-white transition-all`}
-              >
-                Learn More
-              </button>
-            </div>
-          ))}
-        </div>
-      </section>
+      
+      <img 
+        src={manta2img} 
+        alt="manta2" 
+        className="absolute top-[17%] left-[50%] w-[20%] z-10 min-w-60"
+        ref={manta2}
+        onMouseMove={(e) => handleMouseMove(e, manta2)}
+        onMouseLeave={() => handleMouseLeave(manta2.current)}
+      />
+
+      <div 
+        ref={headingRef} 
+        className="main-heading h-screen w-full text-[3rem] sm:text-[4rem] md:text-[6rem] lg:text-[7rem] font-extrabold text-white text-center relative my-8 flex items-center justify-center tracking-wide m-0 p-0"   
+        style={{ textShadow: "0 4px 8px rgba(0, 188, 212, 0.4), 0 0 20px rgba(0, 188, 212, 0.3)" }}
+      >
+        <h1 className="-translate-y-15">Discover Species</h1>
       </div>
-      <footer className='footer w-full flex flex-col h-[15em] justify-center items-center bg-[#1a1a1a] text-white rounded-t-2xl mt-[1em] z-1 shadow-md'>
-        <h1>Just A footer</h1>
-        <p>created by team rocket</p>
-      </footer>
-    </div>
+
+      <div className='cursorEffect pointer-events-none fixed h-[5vw] w-[5vw] rounded-[50%] transform translate-x-[-50%] translate-y-[-50%] z-999 backdrop-invert transition-all duration-[10ms] ease-linear' />
+
+      <div className="min-h-screen">
+        <div ref={bgTrigger}>
+          <section className="p-6 sm:p-10">
+            <h3 className="text-2xl sm:text-3xl font-bold mb-6 text-white">Explore Species</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
+              {data.species.map((species) => {
+                const color = ColorMap[species.status.toLowerCase()] || "gray-300";
+                const glow = ShadowMap[species.status.toLowerCase()] || "";
+                return (
+                  <div
+                    key={species.name}
+                    className={`p-4 rounded-xl bg-[#F1E4C3] transition-transform ease-linear transform hover:scale-105 hover:shadow-2xl ${glow}`}
+                  >
+                    <img
+                      src={species.image}
+                      alt={species.name}
+                      className="rounded-lg mb-3 w-full object-cover h-40 sm:h-48"
+                    />
+                    <h4 className="text-lg font-semibold">{species.name}</h4>
+                    <p className="text-sm italic leading-relaxed">
+                      {species.description}
+                    </p>
+                    <span className={`inline-block mt-2 px-3 py-1 text-xs rounded-full border-[3px] ${color}`}>
+                      {species.status}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+
+          <section className="p-6 sm:p-10">
+            <h3 className="text-2xl sm:text-3xl font-bold mb-6 text-white">Endangered Species Spotlight</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {data.endangered.map((species) => (
+                <div key={species.name} className="p-6 rounded-lg bg-[#F1E4C3] transition-transform ease-linear transform hover:scale-105 hover:shadow-2xl shadow-red-600">
+                  <img
+                    src={species.image}
+                    alt={species.name}
+                    className="rounded mb-4 w-full object-cover h-56 sm:h-64"
+                  />
+                  <h4 className="text-xl sm:text-2xl font-semibold">{species.name}</h4>
+                  <p className="text-sm mt-2">{species.description}</p>
+                  <button
+                    className={`mt-4 px-4 py-2 rounded-md border border-red-600 hover:bg-red-600 hover:text-white transition-all`}
+                  >
+                    Learn More
+                  </button>
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
+
+        <footer className='footer w-full flex flex-col h-[12em] sm:h-[15em] justify-center items-center bg-[#1a1a1a] text-white rounded-t-2xl mt-[1em] z-1 shadow-md'>
+          <h1>Just A footer</h1>
+          <p>created by team rocket</p>
+        </footer>
+      </div>
     </>
   );
 }
