@@ -1,4 +1,4 @@
-import './species.css';
+import '../index.css';
 import { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -8,6 +8,17 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useMediaQuery } from 'react-responsive';
 
 gsap.registerPlugin(SplitText, CSSPlugin, ScrollTrigger);
+
+import background from "../Assets/view-archeological-underwater-building-ruins.jpg"
+import exploreImg from "../Assets/explore_image.webp";
+import threatsImg from "../Assets/threats_image.webp";
+import solutionsImg from "../Assets/solutions_image.webp";
+import storiesImg from "../Assets/stories_image.jpeg";
+import infographicsImg from "../Assets/infographics_image.jpg";
+import quizImg from "../Assets/quiz_image.png";
+import exploreSpeciesImg from "../Assets/exploreSpecies.jpg";
+import dolphinImg from "../Assets/dolphin.png";
+import mantaRayImg from "../Assets/manta_home.png";
 
 function HomePage() {
   const isMobile = useMediaQuery({ query: '(max-width: 800px)' });
@@ -39,25 +50,25 @@ function HomePage() {
   const currentList = isFun ? funFacts : deadlyFacts;
 
   const items = [
-    { name: "Explore", href: "/explore", imageUrl: "../../Assets/explore_image.webp", text: "Dive into the depths — discover the secrets of the sea." },
-    { name: "Threats", href: "/threats", imageUrl: "../../Assets/threats_image.webp", text: "Facing the tide — the dangers our oceans endure." },
-    { name: "Solutions", href: "/solutions", imageUrl: "../../Assets/solutions_image.webp", text: "Turning the tide — how we can protect our oceans.", line2: "Hope floats — real answers for a healthier sea." },
-    { name: "Stories", href: "/stories", imageUrl: "../../Assets/stories_image.jpeg", text: "Voices of the ocean — tales from the deep." },
-    { name: "Infographics", href: "/infographics", imageUrl: "../../Assets/infographics_image.jpg", text: "The ocean, visualized — facts that make waves." },
-    { name: "Quiz", href: "/quiz", imageUrl: "../../Assets/quiz_image.png", text: "Test your tides — how well do you know the ocean?" },
-    { name: "Explore Species", href: "/species", imageUrl: "../../Assets/exploreSpecies.jpg", text: "Explore the creatures that adore the ocean" }
+    { name: "Explore", href: "/explore", imageUrl: exploreImg, text: "Dive into the depths — discover the secrets of the sea." },
+    { name: "Threats", href: "/threats", imageUrl: threatsImg, text: "Facing the tide — the dangers our oceans endure." },
+    { name: "Solutions", href: "/solutions", imageUrl: solutionsImg, text: "Turning the tide — how we can protect our oceans.", line2: "Hope floats — real answers for a healthier sea." },
+    { name: "Stories", href: "/stories", imageUrl: storiesImg, text: "Voices of the ocean — tales from the deep." },
+    { name: "Infographics", href: "/infographics", imageUrl: infographicsImg, text: "The ocean, visualized — facts that make waves." },
+    { name: "Quiz", href: "/quiz", imageUrl: quizImg, text: "Test your tides — how well do you know the ocean?" },
+    { name: "Explore Species", href: "/species", imageUrl: exploreSpeciesImg, text: "Explore the creatures that adore the ocean" }
   ];
 
   const animals = [
     {
       name: "Dolphin",
-      src: "../../Assets/dolphin.png",
+      src: dolphinImg,
       style: { top: "26%", left: "53%", width: "25vw", maxWidth: "400px" },
       depth: 3
     },
     {
       name: "MantaRay",
-      src: "../../Assets/manta_home.png",
+      src: mantaRayImg,
       style: { top: "45%", left: "22%", width: "22vw", maxWidth: "420px" },
       depth: 2
     },
@@ -221,7 +232,7 @@ useGSAP(() => {
       >
         <div
           className="fixed inset-0 bg-cover bg-center -z-10 banner"
-          style={{ backgroundImage: "url('../../Assets/view-archeological-underwater-building-ruins.jpg')" }}
+          style={{ backgroundImage: `url(${background})` }}
         />
 
         {animals.map((a) => (
