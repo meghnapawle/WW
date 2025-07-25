@@ -11,6 +11,14 @@ gsap.registerPlugin(ScrollTrigger);
 import background from '../../Assets/background_discover_species.png';
 import manta1img from '../../Assets/manta1.png'
 import manta2img from '../../Assets/manta2.png'
+import clownfish from "../Assets/clownfish.jpeg"
+import lionfish from "../Assets/lionfish.jpg"
+import blueTang from "../Assets/Paletten-Doktorfisch_Münster.jpeg"
+import mandarinfish from "../Assets/mandarinfish.jpg"
+import whiteShark from "../Assets/White_shark.webp"
+import mantaRay from "../Assets/Dharavandhoo_Thila_-_Manata_Black_Pearl.jpeg"
+import bluewhale from "../Assets/bluewhale.jpg"
+import hawksbillTurtle from "../Assets/HawksbillTurtle.jpg"
 
 
 
@@ -18,37 +26,37 @@ const data = {
   species: [
     {
       name: "Clownfish",
-      image: "../Assets/clownfish.jpeg",
+      image: clownfish,
       description: "Lives in sea anemones, part of coral reef ecosystems.",
       status: "Least Concern",
     },
     {
       name: "Lionfish",
-      image: "../Assets/lionfish.jpg",
+      image: lionfish,
       description: "Venomous predator affecting native ecosystems.",
       status: "Invasive",
     },
     {
       name: "Blue Tang",
-      image: "../Assets/Paletten-Doktorfisch_Münster.jpeg",
+      image: blueTang,
       description: "Famous for its appearance in coral reefs.",
       status: "Least Concern",
     },
     {
       name: "Mandarinfish",
-      image: "../Assets/mandarinfish.jpg",
+      image: mandarinfish,
       description: "Known for its vivid coloration and reef habitat.",
       status: "Least Concern",
     },
     {
       name: "Great White Shark",
-      image: "../Assets/White_shark.webp",
+      image: whiteShark,
       description: "Apex predator facing threats from overfishing.",
       status: "Vulnerable",
     },
     {
       name: "Manta Ray",
-      image: "../Assets/Dharavandhoo_Thila_-_Manata_Black_Pearl.jpeg",
+      image: mantaRay,
       description: "Large filter-feeder known for its majestic flight.",
       status: "Vulnerable",
     },
@@ -56,14 +64,14 @@ const data = {
   endangered: [
     {
       name: "Blue Whale",
-      image: "../Assets/bluewhale.jpg",
+      image: bluewhale,
       description:
         "Critically endangered due to overfishing and climate change.",
       learnMoreLink: "#",
     },
     {
       name: "Hawksbill Turtle",
-      image: "../Assets/HawksbillTurtle.jpg",
+      image: hawksbillTurtle,
       description:
         "Critically endangered due to habitat loss and illegal trade.",
       learnMoreLink: "#",

@@ -9,12 +9,18 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CSSPlugin);
 
+import image1 from "../Assets/animal_image1.jpg"
+import image2 from "../Assets/animal_image2.jpg"
+import image3 from "../Assets/animal_image3.webp"
+
+import background from "../Assets/species_bg.jpg"
+
 const animal = {
     name: "Jellyfish",
     imageUrls: [
-        "../Assets/animal_image1.jpg",
-        "../Assets/animal_image2.jpg",
-        "../Assets/animal_image3.webp"
+        image1,
+        image2,
+        image3
     ],
     count: "Unknown",
     conservationStatus: "least concern",
@@ -215,7 +221,7 @@ const SpeciesProfile = () => {
             <div
                 ref={bgRef}
                 className="banner fixed top-0 left-0 w-full h-full bg-cover bg-center bg-no-repeat z-0 opacity-30"
-                style={{ backgroundImage: `url(../Assets/species_bg.jpg)` }}
+                style={{ backgroundImage: `url(${background})` }}
             />
             <main ref={container1Ref} className="text-white z-10 w-full">
                 <div className="mt-[3em] mx-auto px-4 pt-10 pb-4 md:pt-20">
