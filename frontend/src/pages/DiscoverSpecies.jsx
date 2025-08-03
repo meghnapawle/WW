@@ -1,5 +1,5 @@
-import Nav from "./Nav";
-import './species.css'
+import Nav from "../components/navbar/Nav.jsx";
+import '../index.css'
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -8,9 +8,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(SplitText);
 gsap.registerPlugin(ScrollTrigger);
 
-import background from '../../Assets/background_discover_species.png';
-import manta1img from '../../Assets/manta1.png'
-import manta2img from '../../Assets/manta2.png'
+import background from '../Assets/background_discover_species.png';
+import manta1img from '../Assets/manta1.png'
+import manta2img from '../Assets/manta2.png'
 import clownfish from "../Assets/clownfish.jpeg"
 import lionfish from "../Assets/lionfish.jpg"
 import blueTang from "../Assets/Paletten-Doktorfisch_Münster.jpeg"
@@ -145,16 +145,16 @@ const DiscoverSpecies = ()=> {
         ease: "power2.out",
       });
     }
-  useEffect(()=>{
-    const circle = document.querySelector(".cursorEffect")
-    const handlemousemove=  (e)=>{
-      circle.style.top=`${e.clientY}px`;
-      circle.style.left=`${e.clientX}px`;
-    };
-    document.addEventListener('mousemove', handlemousemove)
-    return () => {document.removeEventListener('mousemove', handlemousemove);
-    };
-  },[]);
+  // useEffect(()=>{
+  //   const circle = document.querySelector(".cursorEffect")
+  //   const handlemousemove=  (e)=>{
+  //     circle.style.top=`${e.clientY}px`;
+  //     circle.style.left=`${e.clientX}px`;
+  //   };
+  //   document.addEventListener('mousemove', handlemousemove)
+  //   return () => {document.removeEventListener('mousemove', handlemousemove);
+  //   };
+  // },[]);
 
   useGSAP(()=>{
     let split = new SplitText(headingRef.current)
@@ -208,12 +208,12 @@ const DiscoverSpecies = ()=> {
       <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-[-5] bg-black opacity-0" ref={bgRef} />
       <div 
         className="banner fixed top-0 h-screen w-screen -z-10 bg-cover bg-center overflow-hidden m-0 p-0" 
-        style={{ backgroundImage: {background} }}
+        style={{ backgroundImage: `url(${background})` }}
       ></div>
 
       <img 
         src={manta1img} 
-        alt="manta1" 
+        alt="manta1"
         className="absolute top-[43%] left-[7%] w-[25%] z-10 min-w-60" 
         ref={manta1}
         onMouseMove={(e) => handleMouseMove(e, manta1)}
@@ -237,7 +237,7 @@ const DiscoverSpecies = ()=> {
         <h1 className="-translate-y-15">Discover Species</h1>
       </div>
 
-      <div className='cursorEffect pointer-events-none fixed h-[5vw] w-[5vw] rounded-[50%] transform translate-x-[-50%] translate-y-[-50%] z-999 backdrop-invert transition-all duration-[10ms] ease-linear' />
+      {/* <div className='cursorEffect pointer-events-none fixed h-[5vw] w-[5vw] rounded-[50%] transform translate-x-[-50%] translate-y-[-50%] z-999 backdrop-invert transition-all duration-[10ms] ease-linear' /> */}
 
       <div className="min-h-screen">
         <div ref={bgTrigger}>

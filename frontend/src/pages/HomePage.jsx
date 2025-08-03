@@ -75,17 +75,17 @@ function HomePage() {
 
   ];
 
-  useEffect(() => {
-    if (!isMobile) {
-      const circle = document.querySelector(".cursorEffect");
-      const handleMouseMove = (e) => {
-        circle.style.top = `${e.clientY}px`;
-        circle.style.left = `${e.clientX}px`;
-      };
-      document.addEventListener('mousemove', handleMouseMove);
-      return () => document.removeEventListener('mousemove', handleMouseMove);
-    }
-  }, [isMobile]);
+  // useEffect(() => {
+  //   if (!isMobile) {
+  //     const circle = document.querySelector(".cursorEffect");
+  //     const handleMouseMove = (e) => {
+  //       circle.style.top = `${e.clientY}px`;
+  //       circle.style.left = `${e.clientX}px`;
+  //     };
+  //     document.addEventListener('mousemove', handleMouseMove);
+  //     return () => document.removeEventListener('mousemove', handleMouseMove);
+  //   }
+  // }, [isMobile]);
 
   useGSAP(() => {
     let split = new SplitText(headingRef.current);
@@ -264,7 +264,7 @@ useGSAP(() => {
         </div>
       </section>
 
-      <div className='cursorEffect pointer-events-none fixed h-[5vw] w-[5vw] rounded-full -translate-x-1/2 -translate-y-1/2 backdrop-invert transition-all duration-[10ms] ease-linear z-[999]' />
+      {/* <div className='cursorEffect pointer-events-none fixed h-[5vw] w-[5vw] rounded-full -translate-x-1/2 -translate-y-1/2 backdrop-invert transition-all duration-[10ms] ease-linear z-[999]' /> */}
 
       <div className='content flex w-full px-4 md:px-8 py-12 flex-col justify-end items-center'>
 

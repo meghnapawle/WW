@@ -1,15 +1,10 @@
-// uses ".banner" for scroll trigger
-// navbar expands when bottom of banner reaches 70% of viewport
-// refer lines 124 and 125 to change trigger behaviour
-
 import './nav.css';
 import { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { CSSPlugin } from 'gsap/CSSPlugin';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useMediaQuery } from 'react-responsive';
 
-gsap.registerPlugin(ScrollTrigger, CSSPlugin);
+gsap.registerPlugin(CSSPlugin);
 
 const show_nav = {
   x: 0,
@@ -28,7 +23,6 @@ const show_links = {
   opacity: 1,
   duration: 0.2,
   ease: "power2.out"
-
 };
 
 const show_links_mobile = {
@@ -37,7 +31,6 @@ const show_links_mobile = {
   opacity: 1,
   duration: 0.2,
   ease: "power2.out"
-
 };
 
 const hide_nav = {
@@ -56,8 +49,8 @@ const hide_links = {
   duration: 0.2
 };
 
-
 const nav_items = ["Explore", "Threats", "Solutions", "Stories", "Infographics", "Quiz"];
+const links = ["/explore", "/threats", "/solutions", "/stories", "/infographics", "/quiz"];
 
 function Nav() {
   const navbar = useRef(null);
@@ -65,8 +58,7 @@ function Nav() {
   const tl = useRef(null);
   const isMobile = useMediaQuery({ query: '(max-width: 800px)' });
   const [expanded, setExpanded] = useState(false);
-  const scrollTriggerRef = useRef(null);
-  const clickRef = useRef(null)
+  const clickRef = useRef(null);
 
   const expand = () => {
     if (tl.current) tl.current.kill();
@@ -118,37 +110,25 @@ function Nav() {
       width:"7vw",
     }
     )}
-  useEffect( ()=>{
-    if(!isMobile){
-      scrollTriggerRef.current = ScrollTrigger.create({
-        trigger: ".banner",
-        start: "bottom 70%",
-        onEnter: () => {
-          expand();
-          setExpanded(true);
-        },
-        onLeaveBack: () => {
-          collapse();
-          setExpanded(false);
-        },      });
-    }
-    return ()=>{scrollTriggerRef.current?.kill();}
-  },[isMobile])
 
   useEffect(()=>{
     const nav = navbar.current;
     const list = liRef.current;
 
     if (!nav || !list) return;
+
+    if (isMobile) {
       gsap.set(nav, {
+        position: "fixed",
+        top: "20px",
+        left: "20px",
         height: 'auto',
         textAlign: "center",
         width: "7vw",
         minWidth: "6em",
-        left: "50%",
-        xPercent: -50,
         display: "flex",
         justifyContent:"center",
+        zIndex: 1000,
       });
 
       gsap.set(list, {
@@ -156,24 +136,38 @@ function Nav() {
         opacity: 0,
         display: "none"
       });
+      setExpanded(false);
+    } else {
+      gsap.set(nav, {
+        height: 'auto',
+        display: "flex",
+        flexDirection: "row",
+        width: "97vw",
+        justifyContent: "space-between",
+        x: 0,
+        left: "50%",
+        xPercent: -50,
+        textAlign: "left",
+        position: "relative",
+      });
+
+      gsap.set(list, {
+        visibility: "visible",
+        opacity: 1,
+        display: "flex",
+        flexDirection: "row",
+      });
+      setExpanded(true);
+    }
   },[isMobile])
+
   useEffect(() => {
     const nav = navbar.current;
     const list = liRef.current;
     if (!nav || !list) return;
+    
     if (!isMobile) {
-      if(!expanded){
-        nav.addEventListener("mouseenter", expand);
-        nav.addEventListener("mouseleave", collapse);
-
-      }
-
-      return () => {
-        if(!expanded){
-        nav.removeEventListener("mouseenter", expand);
-        nav.removeEventListener("mouseleave", collapse);
-        }
-      };
+      return;
     }
 
     const toggle = () => {
@@ -187,16 +181,17 @@ function Nav() {
       }
     };
 
-    clickRef.current.addEventListener("click", toggle);
+    if (clickRef.current) {
+      clickRef.current.addEventListener("click", toggle);
+    }
 
     return () => {
       if(clickRef.current){
-      clickRef.current.removeEventListener("click", toggle);
+        clickRef.current.removeEventListener("click", toggle);
       }
     };
   }, [isMobile, expanded]);
 
- 
   return (
     <nav ref={navbar} className="nav">
       <div ref={clickRef} className="logo">
@@ -205,7 +200,11 @@ function Nav() {
       <div>
         <ul ref={liRef} className="list">
           {nav_items.map((item, index) => (
-            <li key={index}>{item}</li>
+            <li key={index}>
+              <a href={links[index]} style={{ textDecoration: 'none', color: 'inherit' }}>
+                {item}
+              </a>
+            </li>
           ))}
         </ul>
       </div>

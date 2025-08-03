@@ -5,6 +5,7 @@ import SignUp from "./pages/SignUp.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import Solutions from "./pages/Solutions.jsx"
 import SpeciesProfile from "./pages/speciesProfile.jsx";
+import DiscoverSpecies from "./pages/DiscoverSpecies.jsx"
 function App() {
   return (
    <div>
@@ -18,6 +19,7 @@ function App() {
 
       <Route path= "/signup" element ={<SignUp />} /> 
       <Route path= "/species" element ={<SpeciesProfile />} /> 
+      <Route path= "/discoverspecies" element ={<DiscoverSpecies />} /> 
 
 
     </Routes>

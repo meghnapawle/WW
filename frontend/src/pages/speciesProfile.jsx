@@ -81,19 +81,19 @@ const SpeciesProfile = () => {
     const bgRef = useRef(null);
     const mouseContainerRef = useRef(null);
 
-    useEffect(() => {
-        const circle = document.querySelector(".cursorEffect");
-        const handlemousemove = (e) => {
-            gsap.to(circle, {
-                x: e.clientX,
-                y: e.clientY,
-                duration: 0.1,
-                ease: 'linear'
-            });
-        };
-        document.addEventListener('mousemove', handlemousemove);
-        return () => document.removeEventListener('mousemove', handlemousemove);
-    }, []);
+    // useEffect(() => {
+    //     const circle = document.querySelector(".cursorEffect");
+    //     const handlemousemove = (e) => {
+    //         gsap.to(circle, {
+    //             x: e.clientX,
+    //             y: e.clientY,
+    //             duration: 0.1,
+    //             ease: 'linear'
+    //         });
+    //     };
+    //     document.addEventListener('mousemove', handlemousemove);
+    //     return () => document.removeEventListener('mousemove', handlemousemove);
+    // }, []);
 
     useEffect(() => {
         const el = aboutRef.current;
@@ -217,7 +217,7 @@ const SpeciesProfile = () => {
     return (
         <div className="min-h-screen flex flex-col bg-[#20262e]">
             <Nav />
-            <div className='cursorEffect pointer-events-none fixed h-[5vw] w-[5vw] rounded-full top-0 left-0 transform -translate-x-1/2 -translate-y-1/2 z-50 backdrop-invert' />
+            {/* <div className='cursorEffect pointer-events-none fixed h-[5vw] w-[5vw] rounded-full top-0 left-0 transform -translate-x-1/2 -translate-y-1/2 z-50 backdrop-invert' /> */}
             <div
                 ref={bgRef}
                 className="banner fixed top-0 left-0 w-full h-full bg-cover bg-center bg-no-repeat z-0 opacity-30"
