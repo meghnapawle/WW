@@ -67,14 +67,12 @@ const data = {
       image: bluewhale,
       description:
         "Critically endangered due to overfishing and climate change.",
-      learnMoreLink: "#",
     },
     {
       name: "Hawksbill Turtle",
       image: hawksbillTurtle,
       description:
         "Critically endangered due to habitat loss and illegal trade.",
-      learnMoreLink: "#",
     },
   ],
 };
@@ -282,11 +280,6 @@ const DiscoverSpecies = ()=> {
                   />
                   <h4 className="text-xl sm:text-2xl font-semibold">{species.name}</h4>
                   <p className="text-sm mt-2">{species.description}</p>
-                  <button
-                    className={`mt-4 px-4 py-2 rounded-md border border-red-600 hover:bg-red-600 hover:text-white transition-all`}
-                  >
-                    Learn More
-                  </button>
                 </div>
               ))}
             </div>
