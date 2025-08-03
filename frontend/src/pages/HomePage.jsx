@@ -1,11 +1,13 @@
 import '../index.css';
 import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { SplitText } from 'gsap/SplitText';
 import { CSSPlugin } from 'gsap/CSSPlugin';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useMediaQuery } from 'react-responsive';
+import Nav from '../components/navbar/Nav';
 
 gsap.registerPlugin(SplitText, CSSPlugin, ScrollTrigger);
 
@@ -51,8 +53,7 @@ function HomePage() {
 
   const items = [
     { name: "Explore", href: "/explore", imageUrl: exploreImg, text: "Dive into the depths — discover the secrets of the sea." },
-    { name: "Threats", href: "/threats", imageUrl: threatsImg, text: "Facing the tide — the dangers our oceans endure." },
-    { name: "Solutions", href: "/solutions", imageUrl: solutionsImg, text: "Turning the tide — how we can protect our oceans.", line2: "Hope floats — real answers for a healthier sea." },
+    { name: "Ocean Challenges", href: "/ocean-challenges", imageUrl: threatsImg, text: "Understanding threats and solutions — protecting our blue planet." },
     { name: "Stories", href: "/stories", imageUrl: storiesImg, text: "Voices of the ocean — tales from the deep." },
     { name: "Infographics", href: "/infographics", imageUrl: infographicsImg, text: "The ocean, visualized — facts that make waves." },
     { name: "Quiz", href: "/quiz", imageUrl: quizImg, text: "Test your tides — how well do you know the ocean?" },
@@ -225,7 +226,7 @@ useGSAP(() => {
 
   return (
     <div className='overflow-x-hidden'>
-
+      <Nav />
       <section
         ref={heroRef}
         className="relative h-screen w-full overflow-hidden flex items-center justify-center text-center"
@@ -255,12 +256,12 @@ useGSAP(() => {
           <p className="mt-4 text-lg md:text-xl text-white/80 max-w-xl mx-auto">
             Discover the deep secrets of the blue planet
           </p>
-          <a
-            href="/explore"
+          <Link
+            to="/explore"
             className="inline-block mt-6 px-6 py-3 bg-cyan-500 hover:bg-cyan-400 rounded-xl text-white font-semibold transition-transform transform hover:scale-105"
           >
             Explore Now
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -304,10 +305,10 @@ useGSAP(() => {
           <h2 className="text-4xl font-extrabold text-white mb-10 text-center">Explore More</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {items.map((item, index) => (
-              <a
+              <Link
                 key={index}
                 ref={addToRefs}
-                href={item.href}
+                to={item.href}
                 className={`relative rounded-2xl overflow-hidden group shadow-lg cursor-pointer transform transition-all hover:scale-105 hover:shadow-2xl ${
                   index === items.length - 1 ? 'lg:col-span-3 justify-self-center max-w-sm' : ''
                 }`}
@@ -324,15 +325,71 @@ useGSAP(() => {
                     {item.text} {item.line2 && <span>{item.line2}</span>}
                   </p>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
       </div>
 
-      <footer className='footer w-full bg-white shadow-[0_0_0.25em_0.25em_rgba(0,0,0,0.3)] h-[15em] flex flex-col items-center justify-center rounded-t-[2em]'>
-        <h1>Just A footer</h1>
-        <p>created by team rocket</p>
+      <footer className='footer w-full bg-gradient-to-br from-blue-950 via-indigo-950 to-slate-900 shadow-[0_0_0.25em_0.25em_rgba(0,0,0,0.3)] py-16 flex flex-col items-center justify-center rounded-t-[2em] border-t-4 border-cyan-400/30'>
+        <div className="max-w-4xl mx-auto text-center px-6">
+          {/* Team Section */}
+          <div className="mb-12">
+            <h2 className="text-4xl font-bold bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent mb-6">
+              🚀 Team Rocket
+            </h2>
+            <p className="text-xl text-blue-200 mb-8 italic">
+              "Passionate ocean enthusiasts on a mission to educate and inspire marine conservation"
+            </p>
+            
+            {/* Creators Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+              {["Raunak", "Aarushi", "Meghna", "Dev"].map((name, idx) => (
+                <div key={idx} className="group">
+                  <div className="bg-gradient-to-br from-cyan-900/50 to-blue-900/30 backdrop-blur-sm border border-cyan-500/30 rounded-xl p-4 hover:border-cyan-400/60 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/25">
+                    <div className="text-3xl mb-2">
+                      {idx === 0 ? "🌊" : idx === 1 ? "🐋" : idx === 2 ? "🐠" : "🦈"}
+                    </div>
+                    <h3 className="text-lg font-semibold text-cyan-100">{name}</h3>
+                    <p className="text-sm text-blue-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      {idx === 0 ? "Ocean Explorer" : idx === 1 ? "Marine Biologist" : idx === 2 ? "Conservation Advocate" : "Tech Innovator"}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Project Info */}
+          <div className="border-t border-cyan-500/20 pt-8">
+            <div className="flex flex-col md:flex-row justify-between items-center text-blue-200">
+              <div className="mb-4 md:mb-0">
+                <p className="text-lg font-semibold text-cyan-300">WildWaters Ocean Portal</p>
+                <p className="text-sm">Educational platform for marine conservation awareness</p>
+              </div>
+              <div className="text-center md:text-right">
+                <p className="text-sm">Created with 💙 for our oceans</p>
+                <p className="text-xs text-blue-400 mt-1">© 2025 Team Rocket - All rights reserved</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Ocean Wave Animation */}
+          <div className="mt-8 flex justify-center space-x-2 text-4xl">
+            {["🌊", "🐋", "🌊", "🐠", "🌊"].map((emoji, idx) => (
+              <span 
+                key={idx} 
+                className="animate-bounce"
+                style={{ 
+                  animationDelay: `${idx * 0.2}s`,
+                  animationDuration: "2s"
+                }}
+              >
+                {emoji}
+              </span>
+            ))}
+          </div>
+        </div>
       </footer>
     </div>
   );

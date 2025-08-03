@@ -1,5 +1,6 @@
 import './nav.css';
 import { useRef, useEffect, useState } from 'react';
+import { Link } from 'react-router';
 import gsap from 'gsap';
 import { CSSPlugin } from 'gsap/CSSPlugin';
 import { useMediaQuery } from 'react-responsive';
@@ -49,8 +50,8 @@ const hide_links = {
   duration: 0.2
 };
 
-const nav_items = ["Explore", "Threats", "Solutions", "Stories", "Infographics", "Quiz"];
-const links = ["/explore", "/threats", "/solutions", "/stories", "/infographics", "/quiz"];
+const nav_items = ["Explore", "Ocean Challenges", "Stories", "Infographics", "Quiz"];
+const links = ["/explore", "/ocean-challenges", "/stories", "/infographics", "/quiz"];
 
 function Nav() {
   const navbar = useRef(null);
@@ -201,9 +202,9 @@ function Nav() {
         <ul ref={liRef} className="list">
           {nav_items.map((item, index) => (
             <li key={index}>
-              <a href={links[index]} style={{ textDecoration: 'none', color: 'inherit' }}>
+              <Link to={links[index]} style={{ textDecoration: 'none', color: 'inherit' }}>
                 {item}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

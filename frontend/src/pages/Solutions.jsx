@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Habitspinner from "./Habitspinner.jsx";
+import Nav from "../components/navbar/Nav";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const FloatingFish = ({ emoji, baseLeft, baseTop, xOffset, yOffset }) => {
@@ -67,7 +68,7 @@ const Solutions = () => {
   return (
     
     <div className="relative overflow-x-hidden bg-[#020617] text-white">
-      
+      <Nav />
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden pb-20">
         
